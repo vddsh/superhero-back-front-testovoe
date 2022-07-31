@@ -1,4 +1,5 @@
 Front-end: Redux-Toolkit, Tailwind CSS, React, React-router-dom
+
 Back-end: Node.js, Express,Mongoose (MongoDB), Multer (storage) // better use Amazon S3, Firestore ect.
 
 How to Run 
