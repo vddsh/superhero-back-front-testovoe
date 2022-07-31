@@ -11,6 +11,7 @@ import Container from '../../components/Container';
 import {createFormData} from '../../components/services/services';
 
 
+
 const EditPage: React.FC = () => {
   const {id} = useParams();
   const navigate = useNavigate();
@@ -29,6 +30,10 @@ const EditPage: React.FC = () => {
     setEdit(!edit);
   };
 
+  const handleChangeEdit = () => {
+    setEdit(!edit);
+  };
+
   const handleDeleteSuperHero = async (id: string) => {
     await dispatch(deleteSuperHero(id));
     navigate('/');
@@ -38,24 +43,21 @@ const EditPage: React.FC = () => {
     await dispatch(deleteSuperHeroImages({id, name}));
   };
 
-  if (!edit) {
-    return (
-      <Container>
-        <SuperHeroInformation superHero={superHero}/>
-        <button onClick={() => {
-          setEdit(!edit);
-        }}>edit
-        </button>
-      </Container>
-    );
-  } else {
+  if (edit) {
     return (
       <Container>
         <SuperHeroInfoEdit
           handleDeleteSuperHeroImage={handleDeleteSuperHeroImage}
           superHero={superHero}
           handleSubmitUpdate={handleSubmitUpdate}
-          handleDeleteSuperHero={handleDeleteSuperHero}/>
+          handleDeleteSuperHero={handleDeleteSuperHero}
+          handleChangeEdit={handleChangeEdit}/>
+      </Container>
+    );
+  } else {
+    return (
+      <Container>
+        <SuperHeroInformation superHero={superHero} handleChangeEdit={handleChangeEdit}/>
       </Container>
     );
   }

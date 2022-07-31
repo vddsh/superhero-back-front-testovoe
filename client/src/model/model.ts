@@ -1,5 +1,4 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import SuperHeroInformation from '../components/SuperHeroInformation';
 
 export interface Image {
   filename: string;
@@ -23,16 +22,26 @@ export interface ISuperHeroes {
   totalPages: number;
 }
 
+export interface ImagesContainerProps {
+  children: React.ReactNode;
+}
+
+export interface HandleChangeEditProps {
+  handleChangeEdit: () => void;
+}
+
 export interface superHeroProps {
   superHero: ISuperHero;
 }
 
 export interface SuperHeroInformationProps {
+  handleChangeEdit: () => void;
   superHero: ISuperHero;
 }
 
 export interface SuperHeroInfoEditProps {
-  handleDeleteSuperHeroImage: (id: string, name: string) => Promise<void>
+  handleChangeEdit: () => void;
+  handleDeleteSuperHeroImage: (id: string, name: string) => Promise<void>;
   superHero: ISuperHero;
   handleDeleteSuperHero: (id: string) => Promise<void>;
   handleSubmitUpdate: (event: React.SyntheticEvent) => Promise<void>;

@@ -21,13 +21,13 @@ export const postSuperHero = createAsyncThunk(
   'superHeroes/post',
   async (data: any, {rejectWithValue}) => {
     try {
-        await axios.post(`${SERVER_URL}`, data,{
+     await axios.post(`${SERVER_URL}`, data, {
         headers: {
           'content-Type': 'multipart/form-data'
         },
-      })
+      });
     } catch (err) {
-      return rejectWithValue(err)
+      return rejectWithValue(err);
     }
   }
 );

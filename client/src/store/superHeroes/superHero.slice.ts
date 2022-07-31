@@ -85,6 +85,9 @@ const superHeroSlice = createSlice({
     builder.addCase(getSuperHero.fulfilled, (state, action: PayloadAction<ISuperHero>) => {
       return state = action.payload;
     });
+    builder.addCase(getSuperHero.pending, (state) => {
+      return state = initialState;
+    });
   }
 });
 

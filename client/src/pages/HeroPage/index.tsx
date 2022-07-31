@@ -18,7 +18,7 @@ const HeroPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchSuperHeroes(page));
-  }, [page, superHeroes]);
+  }, [page, modal]);
 
   const nextPage = (): void => setPage(Math.max(1, page - 1));
   const prevPage = (): void => setPage(Math.min(superHeroes.totalPages, page + 1));
@@ -42,8 +42,8 @@ const HeroPage: React.FC = () => {
             key={superHero._id} superHero={superHero}/>)}
         </div>
         <div className='py-20 flex flex-col'>
-          <PageNavigationBtn nextPage={nextPage} prevPage={prevPage}/>
           <CreateHeroBtn modal={modal} setModal={setModal} label={'Create Hero'}/>
+          <PageNavigationBtn nextPage={nextPage} prevPage={prevPage}/>
         </div>
       </div>
     );

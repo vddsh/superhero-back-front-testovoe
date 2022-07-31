@@ -2,6 +2,8 @@ const superHero = require('../models/superHeroes');
 const ImageModel = require('../models/image');
 const fs = require('fs')
 
+const {DIR, PATH} = require('../urls/data')
+
 const getAllHeroes = async (req, res) => {
   let totalPages = await superHero.estimatedDocumentCount() / 5;
   totalPages = Math.ceil(totalPages);
@@ -14,7 +16,7 @@ const getAllHeroes = async (req, res) => {
 const createHero = async (req, res) => {
   const img = [];
   req.files.forEach(item => {
-    item.path = `http://localhost:5500/${item.path}`;
+    item.path = `${PATH}${item.path}`;
     const createImages = new ImageModel({
       filename: item.filename,
       path: item.path,
@@ -40,7 +42,7 @@ const updateHero = async (req, res) => {
   const hero = await superHero.findOne({_id: heroID});
   const img = hero.Images;
   req.files.forEach(item => {
-    item.path = `http://localhost:5500/${item.path}`;
+    item.path = `${PATH}${item.path}`;
     const createImages = new ImageModel({
       filename: item.filename,
       path: item.path,
@@ -67,6 +69,7 @@ const deleteImage = async (req, res) => {
     {_id: heroID},
     {$pull: {Images: {filename: name}}},
   );
+  fs.unlinkSync(`${DIR}/${name}`);
   const data = await superHero.findOne({_id: heroID});
   return res.status(200).json({data});
 };
